@@ -72,6 +72,10 @@ demangled.txt
 *.ndlst
 *.stripped
 objcopy.params
+*.hxxout
+*.cxxout
+compile_cdi
+DemoControlPanel
 
 # files that are local to the build environment
 set250k.c
