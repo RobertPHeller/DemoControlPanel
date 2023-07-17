@@ -8,7 +8,7 @@
 //  Author        : $Author$
 //  Created By    : Robert Heller
 //  Created       : Wed Jun 7 16:21:39 2023
-//  Last Modified : <230607.1711>
+//  Last Modified : <230717.1116>
 //
 //  Description	
 //
@@ -196,6 +196,7 @@ openlcb::NodeID parseNodeID(const char *nidstring)
 
 void parse_args(int argc, char *argv[])
 {
+    bool sawopte = false;
     int opt;
 #define OPTSTRING "hn:e:p:g:h"
     while ((opt = getopt(argc, argv, OPTSTRING)) >= 0)
@@ -215,11 +216,17 @@ void parse_args(int argc, char *argv[])
                 else
                 {
                     NODE_ID = nid;
+                    if (!sawopte)
+                    {
+                        snprintf(pathnamebuffer,sizeof(pathnamebuffer),
+                                 "/tmp/config_eeprom_%012llX",NODE_ID);
+                    }
                 }
             }
             break;
         case 'e':
             strncpy(pathnamebuffer,optarg,sizeof(pathnamebuffer));
+            sawopte = true;
             break;
 #ifdef USE_SOCKET_CAN_PORT
         case 'c':
@@ -265,9 +272,10 @@ const Gpio *const kButtons[] = {
  */
 int appl_main(int argc, char *argv[])
 {
-    // Compute default EEProm and persistant train file pathnames.
+    // Compute default EEProm pathname.
     snprintf(pathnamebuffer,sizeof(pathnamebuffer),
              "/tmp/config_eeprom_%012llX",NODE_ID);
+    
     // Parse command line.
     parse_args(argc, argv);
     
@@ -298,7 +306,7 @@ int appl_main(int argc, char *argv[])
     // Causes all packets to be dumped to stdout.
     stack.print_all_packets();
 #endif
-#if defined(HAVE_SOCKET_CAN_PORT)
+#if defined(USE_SOCKET_CAN_PORT)
     stack.add_socketcan_port_select(cansocket);
 #endif
     
