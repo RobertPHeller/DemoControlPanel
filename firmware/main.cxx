@@ -8,7 +8,7 @@
 //  Author        : $Author$
 //  Created By    : Robert Heller
 //  Created       : Wed Jun 7 16:21:39 2023
-//  Last Modified : <230717.1116>
+//  Last Modified : <230903.1620>
 //
 //  Description	
 //
@@ -114,6 +114,9 @@ public:
     }
 };
 
+#ifdef START_GCTCP_HUB
+int server_port = DEFAULT_GRIDCONNECT_HUB_PORT;
+#endif
 #ifdef USE_GRIDCONNECT_HOST
 int upstream_port = DEFAULT_TCP_GRIDCONNECT_PORT;
 const char *upstream_host = DEFAULT_TCP_GRIDCONNECT_HOST;
@@ -299,6 +302,9 @@ int appl_main(int argc, char *argv[])
     FactoryResetHelper  factory_reset_helper;
     // Create the config file
     stack.create_config_file_if_needed(cfg.seg().internal_config(), openlcb::CANONICAL_VERSION, openlcb::CONFIG_FILE_SIZE);
+#ifdef START_GCTCP_HUB
+    stack.start_tcp_hub_server(server_port);
+#endif
 #ifdef USE_GRIDCONNECT_HOST
     stack.connect_tcp_gridconnect_hub(upstream_host, upstream_port);
 #endif

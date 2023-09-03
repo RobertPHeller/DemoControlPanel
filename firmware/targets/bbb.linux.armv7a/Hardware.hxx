@@ -8,7 +8,7 @@
 //  Author        : $Author$
 //  Created By    : Robert Heller
 //  Created       : Wed Jun 7 13:57:51 2023
-//  Last Modified : <230608.1015>
+//  Last Modified : <230903.1622>
 //
 //  Description	
 //
@@ -120,12 +120,12 @@ S18_Pin, S19_Pin, S20_Pin, S21_Pin> GpioInit;
 #define USE_SOCKET_CAN_PORT
 #define DEFAULT_CAN_SOCKET "can1"
 
-//#define START_GCTCP_HUB
-//#define DEFAULT_GRIDCONNECT_HUB_PORT 12021
+#define START_GCTCP_HUB
+#define DEFAULT_GRIDCONNECT_HUB_PORT 12021
 
-#define USE_GRIDCONNECT_HOST
-#define DEFAULT_TCP_GRIDCONNECT_PORT 12021
-#define DEFAULT_TCP_GRIDCONNECT_HOST "localhost"
+//#define USE_GRIDCONNECT_HOST
+//#define DEFAULT_TCP_GRIDCONNECT_PORT 12021
+//#define DEFAULT_TCP_GRIDCONNECT_HOST "localhost"
 
 #endif // __HARDWARE_HXX
 

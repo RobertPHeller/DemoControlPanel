@@ -8,7 +8,7 @@
 //  Author        : $Author$
 //  Created By    : Robert Heller
 //  Created       : Tue Jul 18 13:53:21 2023
-//  Last Modified : <230718.1427>
+//  Last Modified : <230718.1507>
 //
 //  Description	
 //
@@ -95,7 +95,7 @@ int appl_main(int argc, char *argv[])
         kLEDs[iLed]->clr();
         usleep(500000);
     }
-    
+    //return 0;
     for (iButton = 0; iButton < ARRAYSIZE(kButtons); iButton++)
     {
         pressed[iButton] = 0;
